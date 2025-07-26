@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Your Mind: The Power of Mindfulness - The Anchor</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        /* Navigation (matching index/about style) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #222;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 100px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            background: #222;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #444;
+            transform: translateY(-2px);
+        }
+
+        /* Article Page */
+        .article-page {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 3rem 3rem 2rem;
+            text-align: left;
+        }
+
+        .article-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Author Info */
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .author-details h3 {
+            font-size: 1.1rem;
+            color: #222;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-details p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Featured Image */
+        .featured-image-container {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .featured-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 0 3rem 3rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #222;
+            margin: 3rem 0 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #222;
+            margin: 2.5rem 0 1rem;
+        }
+
+        /* Article Images */
+        .article-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .article-images img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .article-images img:hover {
+            transform: translateY(-4px);
+        }
+
+        /* References Section */
+        .references {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .references p:first-child {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 1.5rem;
+        }
+
+        .references p {
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .references a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer (matching index/about style) */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section p, 
+        .footer-section a {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .article-images {
+                grid-template-columns: 1fr;
+            }
+
+            .article-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+                padding-top: 100px;
+            }
+
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .article-content {
+                padding: 0 1.5rem 2rem;
+            }
+
+            .article-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-subtitle {
+                font-size: 1rem;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+
+            .article-content p {
+                font-size: 1rem;
+            }
+
+            .author-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .featured-image-container {
+                height: 300px;
+            }
+
+            .article-images img {
+                height: 200px;
+            }
+
+            .references {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">The Anchor</div>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#callarticles">Articles</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+<!-- Main Content -->
+<div class="container">
+  <article class="article-page">
+    <header class="article-header">
+      <h1>Accelerating the Renewable Energy Transition in the Philippines.</h1>
+      <p class="article-subtitle">Understanding the path to a cleaner, more resilient future through renewable energy solutions in the Philippines.</p>
+    </header>
+
+    <div style="display: flex; justify-content: center; margin: 2rem 0;">
+      <img src="https://aseanenergy.org/wp-content/uploads/2024/10/pexels-kervin-3976320-1.jpg" alt="png" style="max-width: 100%; height: auto; border-radius: 8px;">
+    </div>
+
+    <div class="article-content">
+      <p> 
+        The Philippines is rapidly advancing its renewable energy infrastructure, driven by ambitious national goals and institutional reforms aimed at reducing reliance on fossil fuels. Under the Philippine Energy Plan 2023–2050 and the National Renewable Energy Program, the government has committed to increasing the share of renewable energy from around 22 percent in 2022 to 35 percent by 2030 and 50 percent by 2040
+
+      </p>
+
+      <p>
+        A major milestone was achieved in June 2025, when the Department of Energy launched its first offshore wind‑only Green Energy Auction (GEA‑5), offering 3,300 megawatts of fixed‑bottom offshore wind capacity, with expected deliveries between 2028 and 2030. Onshore projects are also expanding. The Balaoi and Caunayan Wind Farm in Pagudpud, Ilocos Norte is set to become the country's largest onshore wind farm, with 160 MW capacity generated by 32 turbines supplied by Siemens Gamesa
+        
+      </p>
+
+      <div
+        style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 1000px; margin: 2rem auto; padding: 0 1rem;">
+        <img src="https://www.eeca.govt.nz/assets/Uploads/feature-tile-images/Northern-coast-of-Makara-wind-farm-1200x860px__Resampled.jpg" alt="image"
+          style="max-width: 100%; width: 48%; border-radius: 8px; object-fit: cover;">
+        <img src="https://www.thgenergy.com/wp-content/uploads/2022/09/Energy-Transition-Image.jpg" alt="image"
+          style="max-width: 100%; width: 48%; border-radius: 8px; object-fit: cover;">
+      </div>
+
+      <p>
+        Meanwhile, the iconic Bangui Wind Farm, operating since 2005 and owned by AC Energy, still contributes 33 MW from 20 Vestas turbines along the coastline of Ilocos Norte Meanwhile, the iconic Bangui Wind Farm, operating since 2005 and owned by AC Energy, still contributes 33 MW from 20 Vestas turbines along the coastline of Ilocos Norte. Solar development is equally vigorous. Construction began in 2024 on the Meralco Terra Solar Farm, a massive 3,500 MW solar‑plus‑battery project spanning Bulacan and Nueva Ecija, expected to be fully operational by 2026
+      </p>
+      <p>
+        In Ilagan City, Isabela Province, a P18‑billion, 440 MW solar PV project is underway and will begin feeding electricity into the grid in 2025. Renewables are already delivering measurable cost savings. In the first half of 2025, spot electricity prices in the Philippines dropped to 4.14 pesos/kWh, down from 5.58 pesos/kWh in 2024. The Independent Electricity Market Operator projects that prices could fall by up to 24 percent by 2029 thanks to increased renewable output and greater use of natural gas.
+      </p>
+      <p>
+        To support this energy shift, the Department of Energy has also tightened regulations on stalled projects and aims to reallocate unused contracts to active developers The World Bank has approved financing that is expected to raise the share of renewables in installed capacity from 30 percent in 2023 to 42 percent by 2027, funding offshore wind capacity and energy efficiency initiatives. The World Bank has approved financing that is expected to raise the share of renewables in installed capacity from 30 percent in 2023 to 42 percent by 2027, funding offshore wind capacity and energy efficiency initiatives. Additionally, the government has enacted the Natural Gas Industry Development Act, promoting natural gas as a transition fuel to back up intermittent solar and wind generation and improve grid reliability
+      </p>
+      <div class="references">
+        <p><strong>Image References</strong></p>
+      
+        <p>Bing Images. (n.d.). Wind turbines at sunset.  
+          Retrieved from  
+          <a href="https://tse4.mm.bing.net/th/id/OIP.ap5lkR169Xb7ALnmOdkZgQHaEK?pid=Api&P=0&w=300&h=300" target="_blank">
+            https://tse4.mm.bing.net/th/id/OIP.ap5lkR169Xb7ALnmOdkZgQHaEK
+          </a>
+        </p>
+      
+        <p>EECA (Energy Efficiency and Conservation Authority). (n.d.). Northern coast of Makara wind farm.  
+          Retrieved from  
+          <a href="https://www.eeca.govt.nz/assets/Uploads/feature-tile-images/Northern-coast-of-Makara-wind-farm-1200x860px__Resampled.jpg" target="_blank">
+            https://www.eeca.govt.nz/assets/Uploads/feature-tile-images/Northern-coast-of-Makara-wind-farm
+          </a>
+        </p>
+      
+        <p>THG Energy. (2022). Energy transition concept illustration.  
+          Retrieved from  
+          <a href="https://www.thgenergy.com/wp-content/uploads/2022/09/Energy-Transition-Image.jpg" target="_blank">
+            https://www.thgenergy.com/wp-content/uploads/2022/09/Energy-Transition-Image.jpg
+          </a>
+        </p>
+      </div>
+    </div>
+  </article>
+</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>The Anchor</h3>
+                <p>Showcasing technical writing and digital literacy through collaborative academic work.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#callarticles">Articles</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-section">
+                <h3>Institution</h3>
+                <a href="https://www.hau.edu.ph/" target="_blank">Holy Angel University</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 The Anchor. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

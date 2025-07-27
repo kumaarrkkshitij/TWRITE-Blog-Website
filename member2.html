@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Your Mind: The Power of Mindfulness - The Anchor</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        /* Navigation (matching index/about style) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #222;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 100px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            background: #222;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #444;
+            transform: translateY(-2px);
+        }
+
+        /* Article Page */
+        .article-page {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 3rem 3rem 2rem;
+            text-align: left;
+        }
+
+        .article-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Author Info */
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .author-details h3 {
+            font-size: 1.1rem;
+            color: #222;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-details p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Featured Image */
+        .featured-image-container {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .featured-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 0 3rem 3rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #222;
+            margin: 3rem 0 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #222;
+            margin: 2.5rem 0 1rem;
+        }
+
+        /* Article Images */
+        .article-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .article-images img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .article-images img:hover {
+            transform: translateY(-4px);
+        }
+
+        /* References Section */
+        .references {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .references p:first-child {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 1.5rem;
+        }
+
+        .references p {
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .references a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer (matching index/about style) */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section p, 
+        .footer-section a {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .article-images {
+                grid-template-columns: 1fr;
+            }
+
+            .article-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+                padding-top: 100px;
+            }
+
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .article-content {
+                padding: 0 1.5rem 2rem;
+            }
+
+            .article-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-subtitle {
+                font-size: 1rem;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+
+            .article-content p {
+                font-size: 1rem;
+            }
+
+            .author-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .featured-image-container {
+                height: 300px;
+            }
+
+            .article-images img {
+                height: 200px;
+            }
+
+            .references {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">The Anchor</div>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#callarticles">Articles</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+<!-- Main Content -->
+<div class="container">
+    <a href="index.html#callarticles" class="back-button">← Back to Articles</a>
+  <article class="article-page">
+    <header class="article-header">
+      <h1>Cats and Dogs: Understanding the Key Differences Between Our Beloved Companions</h1>
+      <p class="article-subtitle">From silent stares to wagging tails, discover how cats and dogs express companionship in their own distinct ways.</p>
+    </header>
+
+      <div style="width: 100%; height: 700px; overflow: hidden; border-radius: 8px; margin: 2rem 0;">
+        <img src="https://www.johnpatrick.com/wp-content/uploads/2023/03/cats_and_dogs-1.jpg" alt="image" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+
+    <div class="article-content">
+      <p>Each pet owner and animal enthusiast has encountered the age-old debate about which companion makes the better pet. This comprehensive comparison explores the fundamental differences between cats and dogs to help you understand these remarkable animals better.</p>
+
+      <p>Physical and biological differences between these species are immediately apparent. Dogs, which come in an enormous variety of sizes and breeds, range from tiny Chihuahuas weighing mere pounds to massive Great Danes that can exceed 150 pounds. Cats, whose size variations are more modest, typically weigh between 8 to 15 pounds regardless of breed. It has been observed that dogs possess longer snouts and more varied ear shapes, while cats maintain relatively consistent facial structures with pointed ears and shorter muzzles. The teeth structure also differs significantly: dogs have 42 teeth designed for both tearing and grinding, whereas cats possess 30 razor-sharp teeth that are specialized for hunting and meat consumption.</p>
+
+      <p>Behavioral patterns reveal perhaps the most striking contrasts between these companions. Dogs, which evolved from pack animals, naturally seek social hierarchies and crave constant interaction with their human families. Neither independence nor solitude appeals to most dogs, as they thrive on attention, praise, and structured activities. Cats, conversely, were domesticated from solitary hunters and maintain their independent nature. The majority of cats prefer to observe their surroundings quietly and engage with humans on their own terms. Both species exhibit territorial behaviors, but dogs typically welcome strangers into their space more readily than cats.</p>
+
+      <p>Communication methods demonstrate fascinating differences in how these animals interact with humans. The vocalizations that dogs produce include barking, whining, growling, and howling, each serving specific communicative purposes. It is believed that dogs have developed approximately 10 different vocal sounds to communicate with humans. Cats, whose communication repertoire includes meowing, purring, hissing, and chirping, actually developed meowing primarily to communicate with humans rather than other cats. The purring mechanism, which produces therapeutic vibrations, serves multiple functions including self-healing and expressing contentment.</p>
+
+      <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 1000px; margin: 2rem auto; padding: 0 1rem;">
+        <img src="https://i.abcnewsfe.com/a/d50a648a-2818-4bfd-a73e-b1b90cb5aae0/dogs-1-rf-gty-bb-240314_1710421693379_hpMain.jpg" alt="A dog image" style="max-width: 100%; width: 48%; border-radius: 8px; object-fit: cover;">
+        <img src="https://static.vecteezy.com/system/resources/previews/016/684/525/large_2x/hand-holding-domestic-cute-cat-orange-color-looking-at-camera-on-white-background-free-photo.jpg" alt="A cat image" style="max-width: 100%; width: 48%; border-radius: 8px; object-fit: cover;">
+      </div>
+
+      <p>Care requirements for these animals vary considerably based on their natural instincts and physical needs. Dogs that require regular exercise need daily walks, playtime, and mental stimulation to prevent destructive behaviors. The grooming needs of most dogs depend heavily on their coat type, with some breeds requiring professional grooming every few weeks. Cats, which are naturally equipped with self-grooming behaviors, typically maintain their cleanliness independently. However, the litter box that serves as their bathroom requires daily maintenance from owners. Neither cats nor dogs should be fed the same diet, as their nutritional requirements differ significantly due to their evolutionary backgrounds.</p>
+
+      <p>Both cats and dogs offer unique rewards to their human companions. While dogs provide unwavering loyalty, enthusiasm, and active companionship, cats offer calm presence, independence, and therapeutic purring. The choice between these remarkable animals ultimately depends on individual lifestyle preferences, living situations, and desired levels of pet interaction. Regardless of which species someone chooses, both cats and dogs have proven themselves as loving, beneficial additions to human families for thousands of years.</p>
+
+      <div class="references">
+        <p><strong>References</strong></p>
+
+        <p>Hill’s Pet Nutrition. (n.d.). Differences between dogs and cats. 
+          <em>Hill’s Pet Nutrition.</em> Retrieved from 
+          <a href="https://www.hillspet.com.au/pet-care/resources/differences-between-cats-and-dogs" target="_blank">
+            <br>Hill’s article
+          </a>
+        </p>
+
+        <p>Kinship. (n.d.). Cats vs. dogs: Behavior, intelligence, and care. 
+          <em>Kinship.</em> Retrieved from 
+          <a href="https://www.kinship.com/pet-behavior/cats-vs-dogs" target="_blank">
+            <br>Kinship article
+          </a>
+        </p>
+        <p><strong>Image Sources:</strong> 
+          <a href="https://www.johnpatrick.com/wp-content/uploads/2023/03/cats_and_dogs-1.jpg" target="_blank">Image from JohnPatrick.com</a> |
+        <a href="https://i.abcnewsfe.com/a/d50a648a-2818-4bfd-a73e-b1b90cb5aae0/dogs-1-rf-gty-bb-240314_1710421693379_hpMain.jpg" target="_blank">Image from ABC News</a> | 
+        <a href="https://static.vecteezy.com/system/resources/previews/016/684/525/large_2x/hand-holding-domestic-cute-cat-orange-color-looking-at-camera-on-white-background-free-photo.jpg" target="_blank">Image from Vecteezy</a>.
+        </p>
+        </div>
+      </div>
+    </article>
+  </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>The Anchor</h3>
+                <p>Showcasing technical writing and digital literacy through collaborative academic work.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#callarticles">Articles</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-section">
+                <h3>Institution</h3>
+                <a href="https://www.hau.edu.ph/" target="_blank">Holy Angel University</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 The Anchor. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

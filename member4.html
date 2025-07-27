@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Your Mind: The Power of Mindfulness - The Anchor</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        /* Navigation (matching index/about style) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #222;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 100px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            background: #222;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: #444;
+            transform: translateY(-2px);
+        }
+
+        /* Article Page */
+        .article-page {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 3rem 3rem 2rem;
+            text-align: left;
+        }
+
+        .article-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Author Info */
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .author-details h3 {
+            font-size: 1.1rem;
+            color: #222;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-details p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Featured Image */
+        .featured-image-container {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .featured-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Article Content */
+        .article-content {
+            padding: 0 3rem 3rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #222;
+            margin: 3rem 0 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #222;
+            margin: 2.5rem 0 1rem;
+        }
+
+        /* Article Images */
+        .article-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .article-images img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .article-images img:hover {
+            transform: translateY(-4px);
+        }
+
+        /* References Section */
+        .references {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #222;
+        }
+
+        .references p:first-child {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 1.5rem;
+        }
+
+        .references p {
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .references a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer (matching index/about style) */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section p, 
+        .footer-section a {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links a:hover {
+            background: #666;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .article-images {
+                grid-template-columns: 1fr;
+            }
+
+            .article-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+                padding-top: 100px;
+            }
+
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .article-content {
+                padding: 0 1.5rem 2rem;
+            }
+
+            .article-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-subtitle {
+                font-size: 1rem;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+
+            .article-content p {
+                font-size: 1rem;
+            }
+
+            .author-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .featured-image-container {
+                height: 300px;
+            }
+
+            .article-images img {
+                height: 200px;
+            }
+
+            .references {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">The Anchor</div>
+        <button class="menu-toggle">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#callarticles">Articles</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+<!-- Main Content -->
+  <div class="container">
+    <a href="index.html#callarticles" class="back-button">← Back to Articles</a>
+    <article class="article-page">
+      <header class="article-header">
+        <h1>Philippine President Defends US Ammo Hub Amid Geopolitical Tensions</h1>
+        <p class="article-subtitle">The article discusses Philippine President Ferdinand "Bongbong" Marcos Jr.'s defense
+          of the planned U.S. ammunition hub in Subic, asserting its importance for national defense despite concerns it
+          could make the Philippines a target for China. It also highlights President Donald Trump's public criticism of
+          Marcos' predecessor, Rodrigo Duterte, during a meeting with Marcos, where Trump emphasized the ammunition
+          hub's significance for U.S. and Philippine military capabilities.
+        </p>
+      </header>
+
+      <div style="display: flex; justify-content: center; margin: 2rem 0;">
+        <img src="https://globalnation.inquirer.net/files/2025/07/marcos1_0720-scaled.png.avif" alt="cuarto4" style="max-width: 100%; height: auto; border-radius: 8px;">
+      </div>
+
+      <div class="article-content">
+
+        <p>President Ferdinand "Bongbong" Marcos Jr. recently defended the planned United States ammunition hub in
+          Subic, emphasizing its strategic importance for the Philippines' defense capabilities. His remarks came amidst
+          growing geopolitical tensions in the Indo-Pacific region, particularly concerning China's assertive actions in
+          the South China Sea. The proposed facility, which has drawn scrutiny from various sectors, is seen by the
+          Marcos administration as a crucial component of national security.</p>
+
+        <p>Marcos Jr. addressed concerns that hosting such a facility could make the Philippines a primary target for
+          China in the event of a conflict with the United States. He dismissed these fears, asserting that the primary
+          purpose of the hub is to bolster the Philippines' own defense readiness and capacity to respond to regional
+          threats. "This facility, which will be built in Subic, is not merely for the United States," Marcos explained.
+          "It is for our mutual defense and for the Philippines to have access to vital resources when they are most
+          needed." His administration believes that strengthening alliances and improving logistical capabilities are
+          paramount for safeguarding the nation's sovereignty and territorial integrity.</p>
+
+        <p>The discussion surrounding the ammunition hub gained further traction following a meeting between President
+          Marcos Jr. and President Donald Trump. During their encounter, Trump publicly criticized Marcos' predecessor,
+          Rodrigo Duterte, stating that Duterte's administration "did not know what they were doing" in reference to
+          various policies and decisions. This unsolicited jab at Duterte, whose presidency was marked by a pivot away
+          from traditional US alliances towards closer ties with China, highlighted the shifting dynamics in
+          Philippine-US relations. Trump underscored the significance of the ammunition hub project, remarking that it
+          was "very important" to him and would ensure that the United States and the Philippines possess unparalleled
+          quantities of ammunition and missiles.</p>
+        
+        <div
+          style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 1000px; margin: 2rem auto; padding: 0 1rem;">
+          <img src="https://files01.pna.gov.ph/category-list/2025/07/23/pbbm-with-us-defense-secretary.jpg" alt="cuarto3"
+            style="max-width: 100%; width: 48%; border-radius: 8px; object-fit: cover;">
+          <img src="https://balita.com/wp-content/uploads/2025/07/image-14.png" alt="cuarto2"
+            style="max-width: 100%; width: 48%; border-radius: 8px; object-fit: cover;">
+        </div>
+
+        <p>The establishment of the US ammunition hub is part of a broader effort to enhance military cooperation
+          between Washington and Manila, which was strengthened under Marcos Jr.'s leadership. This renewed alliance,
+          which many observers believe is a direct response to China's increasing assertiveness, involves joint military
+          exercises, intelligence sharing, and the modernization of the Philippine armed forces. The hub, therefore,
+          represents a tangible commitment by both nations to reinforce their defense posture in a volatile region.</p>
+
+        <p>Critics, however, remain wary. They argue that while the hub might enhance defense capabilities, it also
+          risks entangling the Philippines more deeply in superpower rivalries, which could potentially escalate
+          regional conflicts. Nevertheless, the Marcos administration maintains that the benefits of improved defense
+          readiness and strategic deterrence outweigh these risks. The decision reflects a clear strategic direction,
+          prioritizing robust defense partnerships to navigate the complex geopolitical landscape of Southeast Asia. The
+          future operations of this hub, which are being closely watched by regional and international actors, will
+          undoubtedly play a significant role in shaping the security architecture of the Indo-Pacific.</p>
+
+        <div class="references">
+          <p><strong>References</strong></p>
+
+          <p>Cabalza, D. (2025, July 24). Marcos defends US ammo hub; Trump takes jab at Duterte. 
+            <em>INQUIRER.net.</em> Retrieved from 
+            <a href="https://globalnation.inquirer.net/285892/marcos-defends-us-ammo-hub-trump-takes-jab-at-duterte" target="_blank">
+              <br>INQUIRER article
+            </a>
+          </p>
+
+          <p>US-backed Subic ammo hub part of PH defense push - Marcos. (n.d.). 
+            <em>Philippine News Agency.</em> Retrieved from 
+            <a href="https://www.pna.gov.ph/articles/1254920" target="_blank">
+              <br>PNA article
+            </a>
+          </p>
+
+          <p>Domingo, K. (2025, July 22). Trump: PH, US to have 'more ammunition than any country' with proposed Subic hub. 
+            <em>ABS-CBN News.</em> Retrieved from 
+            <a href="https://www.abs-cbn.com/news/nation/2025/7/22/trump-ph-us-to-have-more-ammunition-than-any-country-with-proposed-subic-hub-0121" target="_blank">
+              <br>ABS-CBN News article
+            </a>
+          </p>
+
+          <p>News Service. (2025, July 23). Planned Subic ammo plant “very important” for US, PH - Trump. 
+            <em>balita.com.</em> Retrieved from 
+            <a href="https://balita.com/planned-subic-ammo-plant-very-important-for-us-ph-trump/" target="_blank">
+              <br>Balita.com article
+            </a>
+          </p>
+          <p><strong>Image Sources:</strong> 
+          <a href="https://od2-image-api.abs-cbn.com/prod/editorImage/1753204550820cropped-OvalDiplomacyMarcosTrump.jpg" target="_blank">Image from ABS-CBN</a> | 
+          <a href="https://globalnation.inquirer.net/files/2025/07/marcos1_0720-scaled.png.avif" target="_blank">Image from Inquirer</a> | 
+          <a href="https://files01.pna.gov.ph/category-list/2025/07/23/pbbm-with-us-defense-secretary.jpg" target="_blank">Image from PNA</a> | 
+          <a href="https://pbs.twimg.com/media/GweSyvHbEAIFuer?format=jpg&name=4096x4096" target="_blank">Image from Twitter</a>.
+        </p>
+        </div>
+      </div>
+    </article>
+  </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>The Anchor</h3>
+                <p>Showcasing technical writing and digital literacy through collaborative academic work.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#callarticles">Articles</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-section">
+                <h3>Institution</h3>
+                <a href="https://www.hau.edu.ph/" target="_blank">Holy Angel University</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 The Anchor. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
